@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'com.example'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.8.2'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+
+    compileOnly('jakarta.enterprise:jakarta.enterprise.cdi-api:3.0.0')
+    compileOnly('jakarta.ejb:jakarta.ejb-api:4.0.0')
+    compileOnly('jakarta.json.bind:jakarta.json.bind-api:2.0.0')
+    compileOnly('jakarta.json:jakarta.json-api:2.0.1')
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    implementation('jakarta.ws.rs:jakarta.ws.rs-api:3.0.0')
+    implementation 'org.hibernate:hibernate-core-jakarta:5.6.14.Final'
+    implementation('org.glassfish.jaxb:jaxb-runtime:4.0.0')
+    implementation 'at.favre.lib:bcrypt:0.9.0'
+    implementation "org.postgresql:postgresql:42.5.0"
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
+    implementation group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.6'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+}
+
+test {
+    useJUnitPlatform()
+}
